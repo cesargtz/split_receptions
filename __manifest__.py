@@ -21,7 +21,8 @@
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/split_reception_access.xml',
+        'security/ir.model.access.csv',
         'views/split_reception.xml',
     ],
 
