@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <record id="seq_type_split" model="ir.sequence">
+    <field name="name">split reception</field>
+    <field name="code">reg_code_split</field>
+  </record>
+  <record id="seq_splite" model="ir.sequence">
+      <field name="name">reg split receptions</field>
+      <field name="code">reg_code_split</field>
+      <field name="prefix">S</field>
+      <field name="padding">3</field>
+      <field name="implementation">no_gap</field>
+  </record>
+
+  <record model="ir.ui.view" id="split_reception_form_view">
+    <field name="name">split.reception.form</field>
+    <field name="model">split.receptions</field>
+    <field name="arch" type="xml">
+      <form string="Split Reception Form">
+        <header>
+          <field name="state" widget="statusbar" readonly="1"/>
+        </header>
+        <sheet>
+          <div class="oe_title">
+              <h1>
+                  <field name="name" class="oe_inline" readonly="1"/>
+              </h1>
+          </div>
+          <group>
+            <group string="Origen" col="2">
+              <field name="contract_id" string="Contrato" attrs="{'readonly':[('state', 'in', ['close'])]}"/>
+              <field name="partner_id"/>
+              <field name="hired"/>
+              <field name="delivered"/>
+            </group>
+            <group string="Destino" col="2">
+              <field name="contract_dest_id" string="Contrato"  attrs="{'readonly':[('state', 'in', ['close'])]}" />
+              <field name="partner_dest_id"/>
+              <field name="hired_dest"/>
+              <field name="delivered_dest"/>
+            </group>
+          </group>
+          <notebook>
+            <page string="Tranferencia">
+              <group>
+                <field name="tons_transfer" string="Toneladas a transferir" attrs="{'readonly':[('state', 'in', ['close'])]}"/>
+              </group>
+            </page>
+          </notebook>
+        </sheet>
+        <div class="oe_chatter">
+          <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+          <field name="message_ids" widget="mail_thread"/>
+        </div>
+        </form>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="split_reception_tree_view">
+      <field name="name">split.reception.tree</field>
+      <field name="model">split.receptions</field>
+      <field name="arch" type="xml">
+        <tree string="Split Reception Tree">
+            <field name="name"/>
+            <field name="contract_id"/>
+            <field name="tons_transfer"/>
+            <field name="partner_id"/>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="split_reception_search_view">
+      <field name="name">split.reception.search</field>
+      <field name="model">split.receptions</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="name"/>
+          <field name="contract_id"/>
+          <separator/>
+          <group string="Group By">
+              <filter name="group_by_contract" string="Contrato"
+                      context="{'group_by': 'contract_id'}"/>
+          </group>
+        </search>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="split_receptions_list_action">
+      <field name="name">Transferencia Parcial</field>
+      <field name="res_model">split.receptions</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">Crea tu primer transferencia parcial/</p>
+      </field>
+    </record>
+    <menuitem id="menu_action_split_reception_form" parent="stock.menu_stock_inventory_control" action="split_receptions_list_action" sequence="40"/>
+  </odoo>
