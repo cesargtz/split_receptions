@@ -64,9 +64,9 @@
             <field name="name"/>
             <field name="partner_id"/>
             <field name="contract_id"/>
-            <field name="partner_dest_id"/>
-            <field name="contract_dest_id"/>
-            <field name="tons_transfer" sum="Tons"/>
+            <field name="partner_dest_id" string="Productor Destino"/>
+            <field name="contract_dest_id" string="Contrato Destino"/>
+            <field name="tons_transfer" string="Toneladas" sum="Tons"/>
 
             <field name="state"/>
         </tree>
