@@ -18,7 +18,8 @@
     <field name="arch" type="xml">
       <form string="Split Reception Form">
         <header>
-          <field name="state" widget="statusbar" readonly="1"/>
+            <button name="button_cancel" type="object" string="Cancelar" states="close" class="oe_highlight"  groups="pinup_price_purchase.price_purchase_cancel"/>
+          <field name="state" widget="statusbar" readonly="1" statusbar_visible="open,close"/>
         </header>
         <sheet>
           <div class="oe_title">
@@ -61,9 +62,13 @@
       <field name="arch" type="xml">
         <tree string="Split Reception Tree">
             <field name="name"/>
-            <field name="contract_id"/>
-            <field name="tons_transfer"/>
             <field name="partner_id"/>
+            <field name="contract_id"/>
+            <field name="partner_dest_id"/>
+            <field name="contract_dest_id"/>
+            <field name="tons_transfer" sum="Tons"/>
+
+            <field name="state"/>
         </tree>
       </field>
     </record>

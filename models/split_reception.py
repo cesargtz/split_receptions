@@ -22,9 +22,12 @@ class split_receptions(models.Model):
 
     tons_transfer = fields.Float(digits=(12, 3), required=True)
 
+    active = fields.Boolean(default=True)
+
     state = fields.Selection([
         ('open', 'Abierto'),
         ('close', 'Cerrado'),
+        ('cancel', 'Cancelado'),
     ], default='open',readonly=True)
 
 
@@ -66,3 +69,9 @@ class split_receptions(models.Model):
         vals['state'] = 'close'
         res = super(split_receptions, self).create(vals)
         return res
+
+    @api.multi
+    def button_cancel(self):
+        self.write({'state': 'cancel'})
+        self.active = False
+        return {}
